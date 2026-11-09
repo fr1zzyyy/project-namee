@@ -25,8 +25,8 @@ jobs:
         uses: gradle/actions/setup-gradle@v4
 
       - name: Setup Android SDK
-       uses: android-actions/setup-android@v3
-       with:
+        uses: android-actions/setup-android@v3
+        with:
          accept-android-sdk-licenses: true
        
 
@@ -34,14 +34,14 @@ jobs:
         run: |
           unzip -q OderSoLauncherAndroid.zip -d source
 
-      - name: Build APK
-        run: |
-          PROJECT_DIR=$(dirname "$(find source -name settings.gradle -o -name settings.gradle.kts | head -n 1)")
-          cd "$PROJECT_DIR"
-          gradle assembleDebug
+          - name: Build APK
+            run: |
+              PROJECT_DIR=$(dirname "$(find source -name settings.gradle -o -name settings.gradle.kts | head -n 1)")
+              cd "$PROJECT_DIR"
+              gradle assembleDebug
 
-      - name: Upload APK
-        uses: actions/upload-artifact@v4
-        with:
-          name: OderSoLauncher-APK
-          path: source/**/build/outputs/apk/debug/*.apk
+          - name: Upload APK
+            uses: actions/upload-artifact@v4
+            with:
+             name: OderSoLauncher-APK
+            path: source/**/build/outputs/apk/debug/*.apk
